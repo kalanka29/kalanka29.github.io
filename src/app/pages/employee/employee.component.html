@@ -1,0 +1,36 @@
+<!--@author Kalanka-->
+<div fxLayout="column" fxLayoutAlign="center center">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <h1>Employee Details</h1>
+  </div>
+  <form [formGroup]="employeeForm" (ngSubmit)="calculateSalary()">
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <mat-form-field>
+        <mat-select
+          [(value)]="selectedEmployeeName"
+          (selectionChange)="selectedEmployee($event.value)"
+        >
+          <mat-option
+            *ngFor="let employee of employeesList$ | async"
+            [value]="employee.id"
+          >
+            {{ employee.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <h2>Type:{{ type }}</h2>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <button>
+        Calculate Salary
+      </button>
+    </div>
+  </form>
+  <h1>dfdfdssd</h1>
+  <ul>
+    <li *ngFor="let employee of employeesList$|async| paginate: {itemsPerPage:4 , currentPage: p}">{{ employee.name }}</li>
+  </ul>
+  <pagination-controls (pageChange)="p =$event"></pagination-controls>
+</div>
